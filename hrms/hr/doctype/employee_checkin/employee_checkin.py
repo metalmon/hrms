@@ -26,6 +26,7 @@ class EmployeeCheckin(Document):
 	def validate(self):
 		validate_active_employee(self.employee)
 		self.validate_duplicate_log()
+		self.validate_time_change()
 		self.fetch_shift()
 		self.set_geolocation()
 		self.validate_distance_from_shift_location()
@@ -46,6 +47,15 @@ class EmployeeCheckin(Document):
 				_("This employee already has a log with the same timestamp.{0}").format("<Br>" + doc_link)
 			)
 
+	def validate_time_change(self):
+		if self.attendance and self.has_value_changed("time"):
+			frappe.throw(
+				title=_("Cannot Modify Time"),
+				msg=_(
+					"An attendance record is linked to this checkin. Please cancel the attendance before modifying time."
+				),
+			)
+
 	@frappe.whitelist()
 	def set_geolocation(self):
 		set_geolocation_from_coordinates(self)
@@ -58,6 +68,7 @@ class EmployeeCheckin(Document):
 			)
 		):
 			self.shift = None
+			self.offshift = 1
 			return
 
 		if (
@@ -72,6 +83,7 @@ class EmployeeCheckin(Document):
 				)
 			)
 		if not self.attendance:
+			self.offshift = 0
 			self.shift = shift_actual_timings.shift_type.name
 			self.shift_actual_start = shift_actual_timings.actual_start
 			self.shift_actual_end = shift_actual_timings.actual_end
