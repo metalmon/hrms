@@ -205,30 +205,36 @@ class SalarySlip(TransactionBase):
 				if email_salary_slip:
 					self.email_salary_slip()
 
-		self.update_payment_status_for_gratuity()
+		self.update_payment_status_for_gratuity_and_leave_encashment()
 
-	def update_payment_status_for_gratuity(self):
-		additional_salary = frappe.db.get_all(
+	def update_payment_status_for_gratuity_and_leave_encashment(self):
+		additional_salary_docs = frappe.db.get_all(
 			"Additional Salary",
 			filters={
 				"payroll_date": ("between", [self.start_date, self.end_date]),
 				"employee": self.employee,
-				"ref_doctype": "Gratuity",
+				"ref_doctype": ["in", ["Gratuity", "Leave Encashment"]],
 				"docstatus": 1,
 			},
-			fields=["ref_docname", "name"],
-			limit=1,
+			fields=["ref_doctype", "ref_docname", "name"],
 		)
 
-		if additional_salary:
-			status = "Paid" if self.docstatus == 1 else "Unpaid"
-			if additional_salary[0].name in [entry.additional_salary for entry in self.earnings]:
-				frappe.db.set_value("Gratuity", additional_salary[0].ref_docname, "status", status)
+		if not additional_salary_docs:
+			return
+
+		status = "Paid" if self.docstatus == 1 else "Unpaid"
+		earnings = {entry.additional_salary for entry in self.earnings}
+
+		for additional_salary in additional_salary_docs:
+			if additional_salary.name in earnings:
+				frappe.db.set_value(
+					additional_salary.ref_doctype, additional_salary.ref_docname, "status", status
+				)
 
 	def on_cancel(self):
 		self.set_status()
 		self.update_status()
-		self.update_payment_status_for_gratuity()
+		self.update_payment_status_for_gratuity_and_leave_encashment()
 
 		cancel_loan_repayment_entry(self)
 		self.publish_update()
@@ -320,6 +326,8 @@ class SalarySlip(TransactionBase):
 		if self.employee:
 			self.set("earnings", [])
 			self.set("deductions", [])
+			if hasattr(self, "loans"):
+				self.set("loans", [])
 
 			if self.payroll_frequency:
 				self.get_date_details()
@@ -932,10 +940,14 @@ class SalarySlip(TransactionBase):
 
 		if hasattr(self, "total_structured_tax_amount") and hasattr(self, "current_structured_tax_amount"):
 			self.future_income_tax_deductions = (
-				self.total_structured_tax_amount - self.income_tax_deducted_till_date
+				self.total_structured_tax_amount
+				+ self.get("full_tax_on_additional_earnings", 0)
+				- self.income_tax_deducted_till_date
 			)
 
-			self.current_month_income_tax = self.current_structured_tax_amount
+			self.current_month_income_tax = self.current_structured_tax_amount + self.get(
+				"full_tax_on_additional_earnings", 0
+			)
 
 			# non included current_month_income_tax separately as its already considered
 			# while calculating income_tax_deducted_till_date
@@ -949,7 +961,6 @@ class SalarySlip(TransactionBase):
 				+ self.current_structured_taxable_earnings_before_exemption
 				+ self.future_structured_taxable_earnings_before_exemption
 				+ self.current_additional_earnings
-				+ self.other_incomes
 				+ self.unclaimed_taxable_benefits
 				+ self.non_taxable_earnings
 			)
