@@ -1,3 +1,5 @@
+import dayjs from "@/utils/dayjs"; // Import dayjs
+
 function makeTranslationFunction() {
 	let messages = {};
 	return {
@@ -5,25 +7,46 @@ function makeTranslationFunction() {
 		load: () => Promise.allSettled([
 			setup(),
 			// TODO: load dayjs locales
+			setDayjsLocaleBasedOnSystem(),
 		]),
 	}
 
 	async function setup() {
 		if (window.frappe?.boot?.__messages) {
 			messages = window.frappe?.boot?.__messages;
+			// Set dayjs locale even if using cached messages
+			setDayjsLocaleBasedOnSystem();
 			return;
 		}
 
+		const lang = window.frappe?.boot?.lang ?? navigator.language;
 		const url = new URL("/api/method/frappe.translate.load_all_translations", location.origin);
-		url.searchParams.append("lang", window.frappe?.boot?.lang ?? navigator.language);
+		url.searchParams.append("lang", lang);
 		url.searchParams.append("hash", window.frappe?.boot?.translations_hash || window._version_number || Math.random()); // for cache busting
 		// url.searchParams.append("app", "hrms");
 
 		try {
 			const response = await fetch(url);
 			messages = await response.json() || {}
+			// Set dayjs locale after fetching messages
+			setDayjsLocaleBasedOnSystem();
 		} catch (error) {
 			console.error("Failed to fetch translations:", error)
+			// Attempt to set dayjs locale even on error using fallback
+			setDayjsLocaleBasedOnSystem();
+		}
+	}
+
+	// Function to set dayjs locale based on Frappe/browser settings
+	function setDayjsLocaleBasedOnSystem() {
+		try {
+			const lang = window.frappe?.boot?.lang || navigator.language || 'en';
+			const baseLocale = lang.split('-')[0].toLowerCase();
+			dayjs.locale(baseLocale);
+			// console.log(`Dayjs locale set to: ${baseLocale}`);
+		} catch (e) {
+			console.warn(`Failed to set dayjs locale based on system settings. Falling back to 'en'. Error: ${e}`);
+			dayjs.locale('en'); // Fallback to English
 		}
 	}
 

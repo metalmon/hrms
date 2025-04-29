@@ -7,10 +7,11 @@
 		<template v-if="settings.data?.allow_employee_checkin_from_mobile_app">
 			<div class="font-medium text-sm text-gray-500 mt-1.5" v-if="lastLog">
 				<span>{{ __("Last {0} was at {1}", [__(lastLogType), formatTimestamp(lastLog.time)]) }}</span>
-				<span class="whitespace-pre"> &middot; </span>
-				<router-link :to="{ name: 'EmployeeCheckinListView' }" v-slot="{ navigate }">
-					<span @click="navigate" class="underline">View List</span>
-				</router-link>
+				<div>
+					<router-link :to="{ name: 'EmployeeCheckinListView' }" v-slot="{ navigate }">
+						<span @click="navigate" class="underline">{{ __("View List") }}</span>
+					</router-link>
+				</div>
 			</div>
 			<Button
 				class="mt-4 mb-1 drop-shadow-sm py-5 text-base"
@@ -70,7 +71,7 @@
 			</template>
 
 			<Button :loading="checkins.insert.loading" variant="solid" class="w-full py-5 text-sm disabled:bg-gray-700" @click="submitLog(nextAction.action)">
-				{{ __("Confirm {0}", [nextAction.label]) }}
+				{{ nextAction.action === 'IN' ? __('Confirm Check-in') : __('Confirm Check-out') }}
 			</Button>
 		</div>
 	</ion-modal>
@@ -119,8 +120,8 @@ const lastLogType = computed(() => {
 
 const nextAction = computed(() => {
 	return lastLog?.value?.log_type === "IN"
-		? { action: "OUT", label: __("Check Out") }
-		: { action: "IN", label: __("Check In") }
+		? { action: "OUT", label: __("Check Out", null, "checkout") }
+		: { action: "IN", label: __("Check In", null, "checkin") }
 })
 
 function handleLocationSuccess(position) {
@@ -156,7 +157,7 @@ const handleEmployeeCheckin = () => {
 }
 
 const submitLog = (logType) => {
-	const actionLabel = logType === "IN" ? __("Check-in") : __("Check-out")
+	const actionLabel = logType === "IN" ? __("Check-in", null, "checkin") : __("Check-out", null, "checkout")
 
 	checkins.insert.submit(
 		{

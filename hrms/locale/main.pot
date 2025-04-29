@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Frappe HR VERSION\n"
 "Report-Msgid-Bugs-To: contact@frappe.io\n"
-"POT-Creation-Date: 2025-04-29 16:12+0000\n"
-"PO-Revision-Date: 2025-04-29 16:12+0000\n"
+"POT-Creation-Date: 2025-04-29 17:59+0000\n"
+"PO-Revision-Date: 2025-04-29 17:59+0000\n"
 "Last-Translator: contact@frappe.io\n"
 "Language-Team: contact@frappe.io\n"
 "MIME-Version: 1.0\n"
@@ -1549,6 +1549,7 @@ msgstr ""
 #. Option for the 'Calculate Payroll Working Days Based On' (Select) field in
 #. DocType 'Payroll Settings'
 #: frontend/src/components/BottomTabs.vue:48
+#: frontend/src/views/attendance/Dashboard.vue:2
 #: hrms/hr/doctype/attendance/attendance.json
 #: hrms/hr/doctype/training_event_employee/training_event_employee.json
 #: hrms/hr/workspace/overview/overview.json
@@ -2195,11 +2196,13 @@ msgstr ""
 msgid "Check Error Log {0} for more details."
 msgstr ""
 
-#: frontend/src/components/CheckInPanel.vue:123
+#: frontend/src/components/CheckInPanel.vue:124
+msgctxt "checkin"
 msgid "Check In"
 msgstr ""
 
-#: frontend/src/components/CheckInPanel.vue:122
+#: frontend/src/components/CheckInPanel.vue:123
+msgctxt "checkout"
 msgid "Check Out"
 msgstr ""
 
@@ -2213,7 +2216,8 @@ msgstr ""
 msgid "Check {0} for more details"
 msgstr ""
 
-#: frontend/src/components/CheckInPanel.vue:159
+#: frontend/src/components/CheckInPanel.vue:160
+msgctxt "checkin"
 msgid "Check-in"
 msgstr ""
 
@@ -2222,7 +2226,8 @@ msgstr ""
 msgid "Check-in Date"
 msgstr ""
 
-#: frontend/src/components/CheckInPanel.vue:159
+#: frontend/src/components/CheckInPanel.vue:160
+msgctxt "checkout"
 msgid "Check-out"
 msgstr ""
 
@@ -2622,8 +2627,12 @@ msgstr ""
 msgid "Confirm"
 msgstr ""
 
-#: frontend/src/components/CheckInPanel.vue:73
-msgid "Confirm {0}"
+#: frontend/src/components/CheckInPanel.vue:74
+msgid "Confirm Check-in"
+msgstr ""
+
+#: frontend/src/components/CheckInPanel.vue:74
+msgid "Confirm Check-out"
 msgstr ""
 
 #. Label of the connections_tab (Tab Break) field in DocType 'Job Requisition'
@@ -5066,7 +5075,7 @@ msgstr ""
 msgid "Enter {0}"
 msgstr ""
 
-#: frontend/src/components/CheckInPanel.vue:182
+#: frontend/src/components/CheckInPanel.vue:183
 #: frontend/src/components/FormView.vue:530
 #: frontend/src/components/FormView.vue:557
 #: frontend/src/components/FormView.vue:579
@@ -6095,7 +6104,7 @@ msgstr ""
 msgid "Geolocation Error"
 msgstr ""
 
-#: frontend/src/components/CheckInPanel.vue:143
+#: frontend/src/components/CheckInPanel.vue:144
 #: hrms/public/js/utils/index.js:185
 msgid "Geolocation is not supported by your current browser"
 msgstr ""
@@ -7692,7 +7701,7 @@ msgstr ""
 msgid "Latitude and longitude values are required for checking in."
 msgstr ""
 
-#: frontend/src/components/CheckInPanel.vue:131
+#: frontend/src/components/CheckInPanel.vue:132
 msgid "Latitude: {0}°"
 msgstr ""
 
@@ -8171,7 +8180,7 @@ msgstr ""
 msgid "Loan cannot be repayed from salary for Employee {0} because salary is processed in currency {1}"
 msgstr ""
 
-#: frontend/src/components/CheckInPanel.vue:145
+#: frontend/src/components/CheckInPanel.vue:146
 msgid "Locating..."
 msgstr ""
 
@@ -8207,6 +8216,7 @@ msgid "Log Out"
 msgstr ""
 
 #. Label of the log_type (Select) field in DocType 'Employee Checkin'
+#: frontend/src/components/EmployeeCheckinItem.vue:6
 #: frontend/src/views/attendance/EmployeeCheckinList.vue:25
 #: hrms/hr/doctype/employee_checkin/employee_checkin.json
 msgid "Log Type"
@@ -8235,7 +8245,7 @@ msgstr ""
 msgid "Longitude"
 msgstr ""
 
-#: frontend/src/components/CheckInPanel.vue:132
+#: frontend/src/components/CheckInPanel.vue:133
 msgid "Longitude: {0}°"
 msgstr ""
 
@@ -12558,7 +12568,7 @@ msgstr ""
 msgid "Subsidiary companies have already planned for {1} vacancies at a budget of {2}. Staffing Plan for {0} should allocate more vacancies and budget for {3} than planned for its subsidiary companies"
 msgstr ""
 
-#: frontend/src/components/CheckInPanel.vue:173
+#: frontend/src/components/CheckInPanel.vue:174
 #: frontend/src/components/FormView.vue:515
 #: frontend/src/components/FormView.vue:548
 #: frontend/src/components/FormView.vue:570
@@ -14092,6 +14102,7 @@ msgstr ""
 msgid "View Ledger"
 msgstr ""
 
+#: frontend/src/components/CheckInPanel.vue:12
 #: frontend/src/components/RequestList.vue:27
 #: frontend/src/views/expense_claim/Dashboard.vue:41
 msgid "View List"
@@ -14579,7 +14590,7 @@ msgstr ""
 msgid "{0} deleted successfully!"
 msgstr ""
 
-#: frontend/src/components/CheckInPanel.vue:183
+#: frontend/src/components/CheckInPanel.vue:184
 #: frontend/src/components/RequestActionSheet.vue:290
 msgid "{0} failed!"
 msgstr ""
@@ -14633,7 +14644,7 @@ msgstr ""
 msgid "{0} of {1} Completed"
 msgstr ""
 
-#: frontend/src/components/CheckInPanel.vue:174
+#: frontend/src/components/CheckInPanel.vue:175
 msgid "{0} successful!"
 msgstr ""
 
