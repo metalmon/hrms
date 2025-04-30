@@ -1,14 +1,14 @@
-# Translations template for Frappe HR.
+# Translations template for Human Resources.
 # Copyright (C) 2025 Frappe Technologies Pvt. Ltd.
-# This file is distributed under the same license as the Frappe HR project.
+# This file is distributed under the same license as the Human Resources project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Frappe HR VERSION\n"
+"Project-Id-Version: Human Resources VERSION\n"
 "Report-Msgid-Bugs-To: contact@frappe.io\n"
-"POT-Creation-Date: 2025-04-29 17:59+0000\n"
-"PO-Revision-Date: 2025-04-29 17:59+0000\n"
+"POT-Creation-Date: 2025-04-30 19:29+0000\n"
+"PO-Revision-Date: 2025-04-30 19:29+0000\n"
 "Last-Translator: contact@frappe.io\n"
 "Language-Team: contact@frappe.io\n"
 "MIME-Version: 1.0\n"
@@ -5885,6 +5885,10 @@ msgstr ""
 msgid "Frappe HR"
 msgstr ""
 
+#: hrms/hooks.py:4
+msgid "Frappe Technologies Pvt. Ltd."
+msgstr ""
+
 #. Label of the frequency (Select) field in DocType 'Shift Schedule'
 #. Label of the frequency (Select) field in DocType 'Vehicle Service'
 #: hrms/hr/doctype/shift_schedule/shift_schedule.json
@@ -6688,6 +6692,10 @@ msgstr ""
 
 #: hrms/regional/india/utils.py:165
 msgid "House rented dates should be atleast 15 days apart"
+msgstr ""
+
+#: hrms/hooks.py:3 hrms/hooks.py:17
+msgid "Human Resources"
 msgstr ""
 
 #: hrms/payroll/report/salary_payments_via_ecs/salary_payments_via_ecs.py:60
@@ -8607,6 +8615,10 @@ msgstr ""
 #: hrms/hr/doctype/vehicle_log/vehicle_log.json
 #: hrms/hr/report/vehicle_expenses/vehicle_expenses.py:32
 msgid "Model"
+msgstr ""
+
+#: hrms/hooks.py:5
+msgid "Modern HR and Payroll Software"
 msgstr ""
 
 #: frontend/src/components/AttendanceCalendar.vue:113

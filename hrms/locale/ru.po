@@ -7,16 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Frappe HR VERSION\n"
 "Report-Msgid-Bugs-To: contact@frappe.io\n"
-"POT-Creation-Date: 2025-04-29 17:59+0000\n"
-"PO-Revision-Date: 2025-04-29 21:33+0400\n"
+"POT-Creation-Date: 2025-04-30 19:29+0000\n"
+"PO-Revision-Date: 2025-04-30 23:30+0400\n"
 "Last-Translator: AlexKuzin <dev@olimpicfresh.ru>\n"
-"Language: ru\n"
 "Language-Team: contact@frappe.io\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "Generated-By: Babel 2.13.1\n"
+"X-Generator: Poedit 3.5\n"
 
 #. Label of the unlink_payment_on_cancellation_of_employee_advance (Check)
 #. field in DocType 'HR Settings'
@@ -5886,6 +5887,10 @@ msgstr "Частичная стоимость"
 msgid "Frappe HR"
 msgstr "Frappe HR"
 
+#: hrms/hooks.py:4
+msgid "Frappe Technologies Pvt. Ltd."
+msgstr "Frappe Technologies Pvt. Ltd."
+
 #. Label of the frequency (Select) field in DocType 'Shift Schedule'
 #. Label of the frequency (Select) field in DocType 'Vehicle Service'
 #: hrms/hr/doctype/shift_schedule/shift_schedule.json
@@ -6690,6 +6695,10 @@ msgstr "Даты аренды жилья необходимы для расче�
 #: hrms/regional/india/utils.py:165
 msgid "House rented dates should be atleast 15 days apart"
 msgstr "Периоды аренды жилья должны быть разделены минимум 15 днями"
+
+#: hrms/hooks.py:3 hrms/hooks.py:17
+msgid "Human Resources"
+msgstr "Персонал"
 
 #: hrms/payroll/report/salary_payments_via_ecs/salary_payments_via_ecs.py:60
 msgid "IFSC"
@@ -8606,6 +8615,10 @@ msgstr "Необходимо указать способ оплаты"
 #: hrms/hr/report/vehicle_expenses/vehicle_expenses.py:32
 msgid "Model"
 msgstr "Модель"
+
+#: hrms/hooks.py:5
+msgid "Modern HR and Payroll Software"
+msgstr "Современное программное обеспечение для управления персоналом и расчета заработной платы"
 
 #: frontend/src/components/AttendanceCalendar.vue:113
 #: hrms/hr/doctype/leave_block_list/leave_block_list.js:37
@@ -14734,4 +14747,3 @@ msgstr "{} недействительный статус присутствия.
 #: hrms/hr/doctype/job_requisition/job_requisition.js:22
 msgid "{} {} open for this position."
 msgstr "{} {} открыто для этой должности."
-
