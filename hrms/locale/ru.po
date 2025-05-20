@@ -1587,6 +1587,10 @@ msgstr "Посещаемость"
 msgid "Attendance Calendar"
 msgstr "Календарь посещаемости"
 
+#: frontend/src/components/AttendanceCalendar.vue:3
+msgid "Attendance Calendar"
+msgstr ""
+
 #. Label of a chart in the Shift & Attendance Workspace
 #: hrms/hr/workspace/shift_&_attendance/shift_&_attendance.json
 msgid "Attendance Count"
@@ -2195,6 +2199,10 @@ msgstr "Изменить"
 #: hrms/hr/doctype/leave_application/leave_application.js:187
 msgid "Changing '{0}' to {1}."
 msgstr "Измените '{0}' на {1}."
+
+#: hrms/hr/doctype/leave_application/leave_application.js:187
+msgid "Changing '{0}' to {1}."
+msgstr ""
 
 #: hrms/hr/doctype/goal/goal.js:112
 msgid "Changing KRA in this parent goal will align all the child goals to the same KRA, if any."
@@ -4332,6 +4340,12 @@ msgstr "Email сотрудников"
 msgid "Employee Exit"
 msgstr "Увольнения сотрудников"
 
+#. Label of a Card Break in the Employee Lifecycle Workspace
+#: hrms/hr/workspace/employee_lifecycle/employee_lifecycle.json
+#: hrms/overrides/dashboard_overrides.py:25
+msgid "Employee Exit"
+msgstr ""
+
 #. Label of the employee_exit_section (Section Break) field in DocType 'HR
 #. Settings'
 #: hrms/hr/doctype/hr_settings/hr_settings.json
@@ -4437,6 +4451,11 @@ msgstr "Информация о сотрудниках"
 #: hrms/hr/workspace/employee_lifecycle/employee_lifecycle.json
 msgid "Employee Journey"
 msgstr "Путь сотрудника"
+
+#. Label of a Card Break in the Employee Lifecycle Workspace
+#: hrms/hr/workspace/employee_lifecycle/employee_lifecycle.json
+msgid "Employee Journey"
+msgstr ""
 
 #. Name of a report
 #. Label of a Link in the Leaves Workspace
@@ -5524,6 +5543,10 @@ msgstr "Срок действия перенесенных дней отпуск
 msgid "Expire Leaves"
 msgstr "Истекающие отпуска"
 
+#: hrms/hr/doctype/leave_allocation/leave_allocation.py:493
+msgid "Expire Leaves"
+msgstr ""
+
 #. Label of the expired (Check) field in DocType 'Leave Allocation'
 #: hrms/hr/doctype/leave_allocation/leave_allocation.json
 #: hrms/hr/doctype/leave_allocation/leave_allocation_list.js:8
@@ -6007,6 +6030,10 @@ msgstr "Здесь вы можете включить обналичивание
 msgid "From {0} to {1}"
 msgstr "От {0} до {1}"
 
+#: hrms/payroll/report/salary_register/salary_register.html:8
+msgid "From {0} to {1}"
+msgstr ""
+
 #. Label of the from_year (Int) field in DocType 'Gratuity Rule Slab'
 #: hrms/payroll/doctype/gratuity_rule_slab/gratuity_rule_slab.json
 msgid "From(Year)"
@@ -6297,6 +6324,10 @@ msgstr "Детали жалобы"
 #: hrms/hr/workspace/employee_lifecycle/employee_lifecycle.json
 msgid "Grievance Type"
 msgstr "Тип жалобы"
+
+#: hrms/payroll/report/income_tax_computation/income_tax_computation.py:624
+msgid "Gross Earnings"
+msgstr ""
 
 #. Label of the gross_pay (Currency) field in DocType 'Salary Slip'
 #: frontend/src/components/SalarySlipItem.vue:13
@@ -8092,6 +8123,10 @@ msgstr "Назначенные отпуска"
 msgid "Leaves Expired"
 msgstr "Истекшие отпуска"
 
+#: hrms/hr/doctype/leave_allocation/leave_allocation.py:487
+msgid "Leaves Expired"
+msgstr ""
+
 #: hrms/hr/doctype/leave_application/leave_application_dashboard.html:10
 msgid "Leaves Pending Approval"
 msgstr "Отпуска ожидающие утверждения"
@@ -8910,6 +8945,10 @@ msgstr "Дополнительные расходы не добавлены"
 msgid "No advances found"
 msgstr "Не найдено никаких достижений"
 
+#: frontend/src/components/ExpenseAdvancesTable.vue:63
+msgid "No advances found"
+msgstr ""
+
 #: hrms/payroll/doctype/gratuity/gratuity.py:283
 msgid "No applicable Earning component found in last salary slip for Gratuity Rule: {0}"
 msgstr "Не найден применимый компонент начисления в последнем расчетном листке для правила выходного пособия: {0}"
@@ -8934,6 +8973,10 @@ msgstr "Не найдены записи посещаемости."
 msgid "No attendance records to create"
 msgstr "Не нужно создавать учет посещаемости"
 
+#: hrms/hr/doctype/attendance_request/attendance_request.py:39
+msgid "No attendance records to create"
+msgstr ""
+
 #: hrms/hr/doctype/interview/interview.py:87
 msgid "No changes found in timings."
 msgstr "Не найдены изменения во времени."
@@ -8957,6 +9000,10 @@ msgstr "Не найдены сотрудники с выбранными фил�
 #: frontend/src/components/ExpensesTable.vue:64
 msgid "No expenses added"
 msgstr "Никаких дополнительных расходов"
+
+#: frontend/src/components/ExpensesTable.vue:64
+msgid "No expenses added"
+msgstr ""
 
 #: hrms/public/js/templates/feedback_history.html:55
 msgid "No feedback has been received yet"
@@ -9003,6 +9050,14 @@ msgstr "Не найдено ни одной платежной ведомост�
 msgid "No taxes added"
 msgstr "Никаких налогов"
 
+#: frontend/src/views/salary_slip/Dashboard.vue:50
+msgid "No salary slips found"
+msgstr ""
+
+#: frontend/src/components/ExpenseTaxesTable.vue:56
+msgid "No taxes added"
+msgstr ""
+
 #: hrms/hr/doctype/employee_checkin/employee_checkin.js:50
 msgid "No valid shift found for log time"
 msgstr "Не найдено ни одной действительной смены для времени журнала"
@@ -9018,6 +9073,14 @@ msgstr "Нет добавленных записей {0}"
 #: frontend/src/components/ListView.vue:93
 msgid "No {0} found"
 msgstr "Не найдено {0}"
+
+#: frontend/src/components/SalaryDetailTable.vue:32
+msgid "No {0} added"
+msgstr ""
+
+#: frontend/src/components/ListView.vue:93
+msgid "No {0} found"
+msgstr ""
 
 #. Option for the 'Meal Preference' (Select) field in DocType 'Travel
 #. Itinerary'
@@ -9152,6 +9215,14 @@ msgstr "Код OTP"
 #: frontend/src/views/Login.vue:77
 msgid "OTP Verification"
 msgstr "Проверка OTP"
+
+#: frontend/src/views/Login.vue:86
+msgid "OTP Code"
+msgstr ""
+
+#: frontend/src/views/Login.vue:77
+msgid "OTP Verification"
+msgstr ""
 
 #. Option for the 'Log Type' (Select) field in DocType 'Employee Checkin'
 #: hrms/hr/doctype/employee_checkin/employee_checkin.json
@@ -9931,6 +10002,10 @@ msgstr "Пожалуйста, сначала назначьте структур
 #: hrms/hr/doctype/attendance_request/attendance_request.py:40
 msgid "Please check if employee is on leave or attendance with the same status exists for selected day(s)."
 msgstr "Пожалуйста, проверьте, находится ли сотрудник в отпуске или есть ли присутствие с таким же статусом в выбранный день (дни)."
+
+#: hrms/hr/doctype/attendance_request/attendance_request.py:40
+msgid "Please check if employee is on leave or attendance with the same status exists for selected day(s)."
+msgstr ""
 
 #: hrms/templates/emails/training_event.html:17
 msgid "Please confirm once you have completed your training"
@@ -12472,6 +12547,11 @@ msgstr "Статус"
 msgid "Status for Other Half"
 msgstr "Статус для второй половины"
 
+#. Label of the half_day_status (Select) field in DocType 'Attendance'
+#: hrms/hr/doctype/attendance/attendance.json
+msgid "Status for Other Half"
+msgstr ""
+
 #: hrms/setup.py:401
 msgid "Stock Options"
 msgstr "Опционы"
@@ -14074,6 +14154,10 @@ msgstr "Пункт обслуживания транспортного сред�
 msgid "Verify"
 msgstr "Подтвердить"
 
+#: frontend/src/views/Login.vue:98
+msgid "Verify"
+msgstr ""
+
 #: hrms/hr/doctype/employee_onboarding/employee_onboarding.js:31
 #: hrms/hr/doctype/employee_onboarding/employee_onboarding.js:40
 #: hrms/hr/doctype/employee_onboarding/employee_onboarding.js:47
@@ -14421,6 +14505,30 @@ msgstr "У Вас нет запросов"
 msgid "You have no upcoming holidays"
 msgstr "У Вас нет предстоящих выходных"
 
+#: hrms/hr/doctype/leave_allocation/leave_allocation.py:505
+msgid "You do not have permission to complete this action"
+msgstr ""
+
+#: frontend/src/components/EmployeeAdvanceBalance.vue:26
+msgid "You have no advances"
+msgstr ""
+
+#: frontend/src/components/LeaveBalance.vue:42
+msgid "You have no leaves allocated"
+msgstr ""
+
+#: frontend/src/views/Notifications.vue:82
+msgid "You have no notifications"
+msgstr ""
+
+#: frontend/src/components/RequestList.vue:31
+msgid "You have no requests"
+msgstr ""
+
+#: frontend/src/components/Holidays.vue:32
+msgid "You have no upcoming holidays"
+msgstr ""
+
 #: frontend/src/views/attendance/Dashboard.vue:29
 msgid "You have no upcoming shifts"
 msgstr "У вас нет предстоящих смен"
@@ -14482,6 +14590,10 @@ msgstr "Электронная почта"
 #: frontend/src/views/Login.vue:16
 msgid "johndoe@mail.com"
 msgstr "dmitry@lozhkin.spb.ru"
+
+#: frontend/src/views/Login.vue:16
+msgid "johndoe@mail.com"
+msgstr ""
 
 #: hrms/hr/doctype/department_approver/department_approver.py:89
 msgid "or for the Employee's Department: {0}"
