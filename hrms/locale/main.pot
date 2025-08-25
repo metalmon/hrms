@@ -1,14 +1,14 @@
-# Translations template for Frappe HR.
+# Translations template for Human Resources.
 # Copyright (C) 2025 Frappe Technologies Pvt. Ltd.
-# This file is distributed under the same license as the Frappe HR project.
+# This file is distributed under the same license as the Human Resources project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Frappe HR VERSION\n"
+"Project-Id-Version: Human Resources VERSION\n"
 "Report-Msgid-Bugs-To: contact@frappe.io\n"
-"POT-Creation-Date: 2025-08-24 09:35+0000\n"
-"PO-Revision-Date: 2025-08-24 09:35+0000\n"
+"POT-Creation-Date: 2025-08-25 15:31+0000\n"
+"PO-Revision-Date: 2025-08-25 15:31+0000\n"
 "Last-Translator: contact@frappe.io\n"
 "Language-Team: contact@frappe.io\n"
 "MIME-Version: 1.0\n"
@@ -1134,6 +1134,10 @@ msgstr ""
 msgid "An attendance record is linked to this checkin. Please cancel the attendance before modifying time."
 msgstr ""
 
+#: hrms/hr/hr_dashboard/human_resource/human_resource.py:15
+msgid "Analytics dashboard for Human Resource management"
+msgstr ""
+
 #. Label of the annual_allocation (Float) field in DocType 'Leave Policy
 #. Detail'
 #: hrms/hr/doctype/leave_policy_detail/leave_policy_detail.json
@@ -1607,6 +1611,7 @@ msgstr ""
 #. Option for the 'Calculate Payroll Working Days Based On' (Select) field in
 #. DocType 'Payroll Settings'
 #: frontend/src/components/BottomTabs.vue:48
+#: frontend/src/views/attendance/Dashboard.vue:2
 #: hrms/hr/doctype/attendance/attendance.json
 #: hrms/hr/doctype/training_event_employee/training_event_employee.json
 #: hrms/hr/workspace/overview/overview.json
@@ -2268,10 +2273,12 @@ msgid "Check Error Log {0} for more details."
 msgstr ""
 
 #: frontend/src/components/CheckInPanel.vue:123
+msgctxt "checkin"
 msgid "Check In"
 msgstr ""
 
 #: frontend/src/components/CheckInPanel.vue:122
+msgctxt "checkout"
 msgid "Check Out"
 msgstr ""
 
@@ -2286,6 +2293,7 @@ msgid "Check {0} for more details"
 msgstr ""
 
 #: frontend/src/components/CheckInPanel.vue:159
+msgctxt "checkin"
 msgid "Check-in"
 msgstr ""
 
@@ -2295,6 +2303,7 @@ msgid "Check-in Date"
 msgstr ""
 
 #: frontend/src/components/CheckInPanel.vue:159
+msgctxt "checkout"
 msgid "Check-out"
 msgstr ""
 
@@ -2708,7 +2717,11 @@ msgid "Confirm"
 msgstr ""
 
 #: frontend/src/components/CheckInPanel.vue:73
-msgid "Confirm {0}"
+msgid "Confirm Check-in"
+msgstr ""
+
+#: frontend/src/components/CheckInPanel.vue:73
+msgid "Confirm Check-out"
 msgstr ""
 
 #. Label of the connections_tab (Tab Break) field in DocType 'Job Requisition'
@@ -3591,6 +3604,10 @@ msgstr ""
 msgid "Department Approver"
 msgstr ""
 
+#: hrms/hr/dashboard_chart/department_wise_employee_count/department_wise_employee_count.py:10
+msgid "Department Wise Employee Count"
+msgstr ""
+
 #. Label of a chart in the Recruitment Workspace
 #: hrms/hr/workspace/recruitment/recruitment.json
 msgid "Department Wise Openings"
@@ -3767,6 +3784,10 @@ msgstr ""
 msgid "Designation Skill"
 msgstr ""
 
+#: hrms/hr/dashboard_chart/designation_wise_employee_count/designation_wise_employee_count.py:10
+msgid "Designation Wise Employee Count"
+msgstr ""
+
 #: hrms/payroll/doctype/payroll_entry/payroll_entry.py:207
 msgid "Designation: {0}"
 msgstr ""
@@ -3846,6 +3867,22 @@ msgstr ""
 #. Benefit Application'
 #: hrms/payroll/doctype/employee_benefit_application/employee_benefit_application.json
 msgid "Dispensed Amount (Pro-rated)"
+msgstr ""
+
+#: hrms/hr/dashboard_chart/employees_by_branch/employees_by_branch.py:15
+msgid "Distribution of employees by branch location"
+msgstr ""
+
+#: hrms/hr/dashboard_chart/employees_by_type/employees_by_type.py:15
+msgid "Distribution of employees by employment type"
+msgstr ""
+
+#: hrms/hr/dashboard_chart/gender_diversity_ratio/gender_diversity_ratio.py:15
+msgid "Distribution of employees by gender"
+msgstr ""
+
+#: hrms/hr/dashboard_chart/employees_by_grade/employees_by_grade.py:15
+msgid "Distribution of employees by grade level"
 msgstr ""
 
 #. Label of the do_not_include_in_accounts (Check) field in DocType 'Salary
@@ -4451,6 +4488,10 @@ msgstr ""
 msgid "Employee Exits"
 msgstr ""
 
+#: hrms/hr/number_card/employee_exits_(this_year)/employee_exits_(this_year).py:10
+msgid "Employee Exits (This Year)"
+msgstr ""
+
 #. Name of a DocType
 #. Label of a Link in the Performance Workspace
 #: hrms/hr/doctype/employee_feedback_criteria/employee_feedback_criteria.json
@@ -5014,9 +5055,33 @@ msgstr ""
 msgid "Employees HTML"
 msgstr ""
 
+#: hrms/hr/number_card/employees_joining_(this_quarter)/employees_joining_(this_quarter).py:10
+msgid "Employees Joining (This Quarter)"
+msgstr ""
+
+#: hrms/hr/number_card/employees_relieving_(this_quarter)/employees_relieving_(this_quarter).py:10
+msgid "Employees Relieving (This Quarter)"
+msgstr ""
+
 #. Label of a Link in the Overview Workspace
 #: hrms/hr/workspace/overview/overview.json
 msgid "Employees Working on a Holiday"
+msgstr ""
+
+#: hrms/hr/dashboard_chart_source/employees_by_age/employees_by_age.py:92
+msgid "Employees by Age"
+msgstr ""
+
+#: hrms/hr/dashboard_chart/employees_by_branch/employees_by_branch.py:10
+msgid "Employees by Branch"
+msgstr ""
+
+#: hrms/hr/dashboard_chart/employees_by_grade/employees_by_grade.py:10
+msgid "Employees by Grade"
+msgstr ""
+
+#: hrms/hr/dashboard_chart/employees_by_type/employees_by_type.py:10
+msgid "Employees by Type"
 msgstr ""
 
 #: hrms/hr/doctype/employee_performance_feedback/employee_performance_feedback.py:32
@@ -6067,6 +6132,10 @@ msgstr ""
 msgid "Frappe HR"
 msgstr ""
 
+#: hrms/hooks.py:4
+msgid "Frappe Technologies Pvt. Ltd."
+msgstr ""
+
 #. Label of the frequency (Select) field in DocType 'Shift Schedule'
 #. Label of the frequency (Select) field in DocType 'Vehicle Service'
 #: hrms/hr/doctype/shift_schedule/shift_schedule.json
@@ -6266,6 +6335,10 @@ msgstr ""
 #: hrms/hr/report/employee_analytics/employee_analytics.py:36
 #: hrms/hr/report/employee_birthday/employee_birthday.py:27
 msgid "Gender"
+msgstr ""
+
+#: hrms/hr/dashboard_chart/gender_diversity_ratio/gender_diversity_ratio.py:10
+msgid "Gender Diversity Ratio"
 msgstr ""
 
 #. Label of a Link in the Expense Claims Workspace
@@ -6810,6 +6883,10 @@ msgstr ""
 msgid "Hiring Settings"
 msgstr ""
 
+#: hrms/hr/dashboard_chart_source/hiring_vs_attrition_count/hiring_vs_attrition_count.py:83
+msgid "Hiring vs Attrition Count"
+msgstr ""
+
 #. Option for the 'Status' (Select) field in DocType 'Job Applicant'
 #: hrms/hr/doctype/job_applicant/job_applicant.json
 msgid "Hold"
@@ -6897,6 +6974,14 @@ msgstr ""
 
 #: hrms/regional/india/utils.py:165
 msgid "House rented dates should be atleast 15 days apart"
+msgstr ""
+
+#: hrms/hr/hr_dashboard/human_resource/human_resource.py:10
+msgid "Human Resource"
+msgstr ""
+
+#: hrms/hooks.py:3 hrms/hooks.py:17
+msgid "Human Resources"
 msgstr ""
 
 #: hrms/payroll/report/salary_payments_via_ecs/salary_payments_via_ecs.py:60
@@ -8457,6 +8542,7 @@ msgid "Log Out"
 msgstr ""
 
 #. Label of the log_type (Select) field in DocType 'Employee Checkin'
+#: frontend/src/components/EmployeeCheckinItem.vue:6
 #: frontend/src/views/attendance/EmployeeCheckinList.vue:25
 #: hrms/hr/doctype/employee_checkin/employee_checkin.json
 msgid "Log Type"
@@ -8877,6 +8963,10 @@ msgstr ""
 msgid "Model"
 msgstr ""
 
+#: hrms/hooks.py:5
+msgid "Modern HR and Payroll Software"
+msgstr ""
+
 #: frontend/src/components/AttendanceCalendar.vue:113
 #: hrms/hr/doctype/leave_block_list/leave_block_list.js:37
 msgid "Monday"
@@ -8973,7 +9063,7 @@ msgstr ""
 msgid "My Advances"
 msgstr ""
 
-#: frontend/src/views/expense_claim/List.vue:19
+#: frontend/src/views/expense_claim/List.vue:18
 msgid "My Claims"
 msgstr ""
 
@@ -9077,6 +9167,10 @@ msgstr ""
 #. Label of a quick_list in the Employee Lifecycle Workspace
 #: hrms/hr/workspace/employee_lifecycle/employee_lifecycle.json
 msgid "New Hires (This Month)"
+msgstr ""
+
+#: hrms/hr/number_card/new_hires_(this_year)/new_hires_(this_year).py:10
+msgid "New Hires (This Year)"
 msgstr ""
 
 #: hrms/hr/report/employee_leave_balance/employee_leave_balance.py:61
@@ -9415,10 +9509,34 @@ msgstr ""
 msgid "Number of Withholding Cycles"
 msgstr ""
 
+#: hrms/hr/dashboard_chart/department_wise_employee_count/department_wise_employee_count.py:15
+msgid "Number of employees by department"
+msgstr ""
+
+#: hrms/hr/dashboard_chart/designation_wise_employee_count/designation_wise_employee_count.py:15
+msgid "Number of employees by job designation"
+msgstr ""
+
+#: hrms/hr/number_card/employees_joining_(this_quarter)/employees_joining_(this_quarter).py:15
+msgid "Number of employees joining the company this quarter"
+msgstr ""
+
+#: hrms/hr/number_card/employees_relieving_(this_quarter)/employees_relieving_(this_quarter).py:15
+msgid "Number of employees leaving the company this quarter"
+msgstr ""
+
+#: hrms/hr/number_card/employee_exits_(this_year)/employee_exits_(this_year).py:15
+msgid "Number of employees who left the company this year"
+msgstr ""
+
 #. Description of the 'Actual Encashable Days' (Float) field in DocType 'Leave
 #. Encashment'
 #: hrms/hr/doctype/leave_encashment/leave_encashment.json
 msgid "Number of leaves eligible for encashment based on leave type settings"
+msgstr ""
+
+#: hrms/hr/number_card/new_hires_(this_year)/new_hires_(this_year).py:15
+msgid "Number of new employees hired this year"
 msgstr ""
 
 #: frontend/src/views/Login.vue:86
@@ -13318,7 +13436,7 @@ msgstr ""
 msgid "Team Advances"
 msgstr ""
 
-#: frontend/src/views/expense_claim/List.vue:19
+#: frontend/src/views/expense_claim/List.vue:18
 msgid "Team Claims"
 msgstr ""
 
@@ -13812,6 +13930,10 @@ msgstr ""
 msgid "Total Earnings"
 msgstr ""
 
+#: hrms/hr/number_card/total_employees/total_employees.py:10
+msgid "Total Employees"
+msgstr ""
+
 #. Label of the total_estimated_budget (Currency) field in DocType 'Staffing
 #. Plan'
 #: hrms/hr/doctype/staffing_plan/staffing_plan.json
@@ -14005,6 +14127,10 @@ msgstr ""
 
 #: hrms/hr/doctype/leave_allocation/leave_allocation.py:253
 msgid "Total leaves allocated is mandatory for Leave Type {0}"
+msgstr ""
+
+#: hrms/hr/number_card/total_employees/total_employees.py:15
+msgid "Total number of active employees in the company"
 msgstr ""
 
 #: hrms/payroll/doctype/salary_structure_assignment/salary_structure_assignment.py:148
@@ -14634,6 +14760,7 @@ msgstr ""
 msgid "View Ledger"
 msgstr ""
 
+#: frontend/src/components/CheckInPanel.vue:12
 #: frontend/src/components/RequestList.vue:27
 #: frontend/src/views/expense_claim/Dashboard.vue:41
 msgid "View List"

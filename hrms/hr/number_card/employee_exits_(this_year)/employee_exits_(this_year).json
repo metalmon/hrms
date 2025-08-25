@@ -17,5 +17,6 @@
  "owner": "Administrator",
  "show_percentage_stats": 1,
  "stats_time_interval": "Yearly",
- "type": "Document Type"
+ "type": "Document Type",
+ "python_module": "hrms.hr.number_card.employee_exits_(this_year).employee_exits_(this_year)"
 }

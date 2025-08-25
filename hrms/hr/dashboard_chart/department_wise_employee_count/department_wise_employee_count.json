@@ -26,5 +26,6 @@
  "timespan": "Last Year",
  "type": "Pie",
  "use_report_chart": 0,
- "y_axis": []
+ "y_axis": [],
+ "python_module": "hrms.hr.dashboard_chart.department_wise_employee_count.department_wise_employee_count"
 }

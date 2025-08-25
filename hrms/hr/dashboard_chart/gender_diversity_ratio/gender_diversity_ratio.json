@@ -25,5 +25,6 @@
  "timespan": "Last Year",
  "type": "Pie",
  "use_report_chart": 0,
- "y_axis": []
+ "y_axis": [],
+ "python_module": "hrms.hr.dashboard_chart.gender_diversity_ratio.gender_diversity_ratio"
 }

@@ -85,3 +85,8 @@ def get_employees_by_age(age_list, ranges) -> tuple[list[str], list[int]]:
 		values.append(count)
 
 	return age_range, values
+
+
+# Function to get translatable chart name
+def get_chart_name():
+	return _("Employees by Age")

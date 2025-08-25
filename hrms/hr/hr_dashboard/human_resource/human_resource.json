@@ -61,5 +61,6 @@
  "modified_by": "Administrator",
  "module": "HR",
  "name": "Human Resource",
- "owner": "Administrator"
+ "owner": "Administrator",
+ "python_module": "hrms.hr.hr_dashboard.human_resource.human_resource"
 }

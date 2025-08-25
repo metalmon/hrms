@@ -76,3 +76,8 @@ def get_records(from_date: str, to_date: str, datefield: str, company: str) -> t
 	)
 
 	return data
+
+
+# Function to get translatable chart name
+def get_chart_name():
+	return _("Hiring vs Attrition Count")

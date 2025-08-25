@@ -20,5 +20,6 @@
  "report_function": "Sum",
  "show_percentage_stats": 0,
  "stats_time_interval": "Monthly",
- "type": "Document Type"
+ "type": "Document Type",
+ "python_module": "hrms.hr.number_card.employees_relieving_(this_quarter).employees_relieving_(this_quarter)"
 }
