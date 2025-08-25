@@ -44,13 +44,13 @@
 			<hr />
 
 			<!-- Summary -->
-			<div class="grid grid-cols-2 gap-y-4 mx-2">
+			<div class="grid grid-cols-4 mx-2">
 				<div v-for="status in summaryStatuses" class="flex flex-col gap-1">
 					<div class="flex flex-row gap-1 items-center">
 						<span class="rounded full h-3 w-3" :class="colorMap[status]" />
 						<span class="text-gray-600 text-sm font-medium leading-5"> {{ __(status) }} </span>
 					</div>
-					<span class="text-gray-800 text-base font-semibold leading-6">
+					<span class="text-gray-800 text-base font-semibold leading-6 mx-auto">
 						{{ summary[status] || 0 }}
 					</span>
 				</div>

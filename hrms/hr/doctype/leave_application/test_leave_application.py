@@ -30,6 +30,7 @@ from hrms.hr.doctype.leave_application.leave_application import (
 	get_leave_details,
 	get_new_and_cf_leaves_taken,
 )
+from hrms.hr.doctype.leave_ledger_entry.leave_ledger_entry import expire_allocation
 from hrms.hr.doctype.leave_policy_assignment.leave_policy_assignment import (
 	create_assignment_for_multiple_employees,
 )
@@ -1312,7 +1313,7 @@ class TestLeaveApplication(HRMSTestSuite):
 		create_carry_forwarded_allocation(employee, leave_type)
 		# when existing attendance is half day
 		attendance_name = mark_attendance(
-			employee=employee, attendance_date=nowdate(), status="Half Day", half_day_status="Absent"
+			employee=employee.name, attendance_date=nowdate(), status="Half Day", half_day_status="Absent"
 		)
 		leave_application = make_leave_application(
 			employee.name,
@@ -1344,7 +1345,7 @@ class TestLeaveApplication(HRMSTestSuite):
 
 		create_carry_forwarded_allocation(employee, leave_type)
 		# when existing attendance is absent
-		attendance_name = mark_attendance(employee=employee, attendance_date=nowdate(), status="Absent")
+		attendance_name = mark_attendance(employee=employee.name, attendance_date=nowdate(), status="Absent")
 
 		leave_application = make_leave_application(
 			employee.name,
@@ -1408,6 +1409,23 @@ class TestLeaveApplication(HRMSTestSuite):
 		)
 		# the status should remain unchanged after creating second half day leave application
 		self.assertEqual(half_day_status_after_second_application, "Present")
+
+	def test_leave_balance_when_allocation_is_expired_manually(self):
+		leave_type = create_leave_type(leave_type_name="Compensatory Off")
+		employee = get_employee()
+
+		leave_allocation = create_leave_allocation(
+			leave_type=leave_type.name, employee=employee.name, employee_name=employee.employee_name
+		)
+		leave_allocation.submit()
+
+		expire_allocation(leave_allocation, expiry_date=getdate())
+
+		leave_balance = get_leave_balance_on(
+			employee=employee.name, leave_type=leave_type.name, date=getdate()
+		)
+
+		self.assertEqual(leave_balance, 0)
 
 
 def create_carry_forwarded_allocation(employee, leave_type, date=None):

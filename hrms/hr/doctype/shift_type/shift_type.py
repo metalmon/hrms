@@ -72,11 +72,11 @@ class ShiftType(Document):
 
 	def get_max_shift_buffer_label(self) -> str:
 		labels = {
-			self.meta.get_label(
-				"allow_check_out_after_shift_end_time"
+			_(
+				self.meta.get_label("allow_check_out_after_shift_end_time")
 			): self.allow_check_out_after_shift_end_time,
-			self.meta.get_label(
-				"begin_check_in_before_shift_start_time"
+			_(
+				self.meta.get_label("begin_check_in_before_shift_start_time")
 			): self.begin_check_in_before_shift_start_time,
 		}
 		return max(labels, key=labels.get)
@@ -116,6 +116,7 @@ class ShiftType(Document):
 			if not self.should_mark_attendance(employee, attendance_date):
 				continue
 
+			overtime_type = single_shift_logs[0].get("overtime_type")
 			(
 				attendance_status,
 				working_hours,
@@ -135,6 +136,7 @@ class ShiftType(Document):
 				in_time,
 				out_time,
 				self.name,
+				overtime_type,
 			)
 
 		# commit after processing checkin logs to avoid losing progress
@@ -164,6 +166,7 @@ class ShiftType(Document):
 				"shift_actual_start",
 				"shift_actual_end",
 				"device_id",
+				"overtime_type",
 			],
 			filters={
 				"skip_auto_attendance": 0,
@@ -402,7 +405,7 @@ def get_actual_shift_end(shift, current_datetime):
 	actual_shift_start = shift_details["actual_start"]
 	actual_shift_end = shift_details["actual_end"]
 
-	if actual_shift_start.date() < actual_shift_end.date():
+	if (actual_shift_start.date() < actual_shift_end.date()) or (current_datetime < actual_shift_start):
 		# shift start and end are on different days
 		actual_shift_end = add_days(actual_shift_end, -1)
 	return actual_shift_end

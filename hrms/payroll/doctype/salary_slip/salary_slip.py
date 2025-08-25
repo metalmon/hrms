@@ -50,7 +50,7 @@ from hrms.payroll.doctype.payroll_period.payroll_period import (
 from hrms.payroll.doctype.salary_slip.salary_slip_loan_utils import (
 	cancel_loan_repayment_entry,
 	make_loan_repayment_entry,
-	process_loan_interest_accruals,
+	process_loan_interest_accrual_and_demand,
 	set_loan_repayment,
 )
 from hrms.payroll.utils import sanitize_expression
@@ -66,7 +66,6 @@ TAX_COMPONENTS_BY_COMPANY = "tax_components_by_company"
 class SalarySlip(TransactionBase):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
-		self.series = f"Sal Slip/{self.employee}/.#####"
 		self.whitelisted_globals = {
 			"int": int,
 			"float": float,
@@ -80,9 +79,6 @@ class SalarySlip(TransactionBase):
 			"ceil": ceil,
 			"floor": floor,
 		}
-
-	def autoname(self):
-		self.name = make_autoname(self.series)
 
 	@property
 	def joining_date(self):
@@ -249,11 +245,6 @@ class SalarySlip(TransactionBase):
 			after_commit=True,
 		)
 
-	def on_trash(self):
-		from frappe.model.naming import revert_series_if_last
-
-		revert_series_if_last(self.series, self.name)
-
 	def get_status(self):
 		if self.docstatus == 2:
 			return "Cancelled"
@@ -347,7 +338,7 @@ class SalarySlip(TransactionBase):
 				self.set_time_sheet()
 				self.pull_sal_struct()
 
-			process_loan_interest_accruals(self)
+			process_loan_interest_accrual_and_demand(self)
 
 	def set_time_sheet(self):
 		if self.salary_slip_based_on_timesheet:
@@ -495,22 +486,19 @@ class SalarySlip(TransactionBase):
 
 			consider_unmarked_attendance_as = payroll_settings.consider_unmarked_attendance_as or "Present"
 
-			if (
-				payroll_settings.payroll_based_on == "Attendance"
-				and consider_unmarked_attendance_as == "Absent"
-			):
-				unmarked_days = self.get_unmarked_days(
-					payroll_settings.include_holidays_in_total_working_days, holidays
-				)
+			if payroll_settings.payroll_based_on == "Attendance":
+				if consider_unmarked_attendance_as == "Absent":
+					unmarked_days = self.get_unmarked_days(
+						payroll_settings.include_holidays_in_total_working_days, holidays
+					)
+					self.absent_days += unmarked_days  # will be treated as absent
+					self.payment_days -= unmarked_days
 				half_absent_days = self.get_half_absent_days(
-					payroll_settings.include_holidays_in_total_working_days,
 					consider_marked_attendance_on_holidays,
 					holidays,
 				)
-				self.absent_days += (
-					unmarked_days + half_absent_days * daily_wages_fraction_for_half_day
-				)  # will be treated as absent
-				self.payment_days -= unmarked_days + half_absent_days * daily_wages_fraction_for_half_day
+				self.absent_days += half_absent_days * daily_wages_fraction_for_half_day
+				self.payment_days -= half_absent_days * daily_wages_fraction_for_half_day
 		else:
 			self.payment_days = 0
 
@@ -529,9 +517,7 @@ class SalarySlip(TransactionBase):
 
 		return unmarked_days
 
-	def get_half_absent_days(
-		self, include_holidays_in_total_working_days, consider_marked_attendance_on_holidays, holidays
-	):
+	def get_half_absent_days(self, consider_marked_attendance_on_holidays, holidays):
 		"""Calculates the number of half absent days for an employee within a date range"""
 		Attendance = frappe.qb.DocType("Attendance")
 		query = (
@@ -545,11 +531,7 @@ class SalarySlip(TransactionBase):
 				& (Attendance.half_day_status == "Absent")
 			)
 		)
-		if (
-			(not include_holidays_in_total_working_days)
-			and (not consider_marked_attendance_on_holidays)
-			and holidays
-		):
+		if (not consider_marked_attendance_on_holidays) and holidays:
 			query = query.where(Attendance.attendance_date.notin(holidays))
 		return query.run()[0][0]
 
@@ -653,7 +635,7 @@ class SalarySlip(TransactionBase):
 
 		for d in working_days_list:
 			if self.relieving_date and d > self.relieving_date:
-				continue
+				break
 
 			leave = leaves.get(d)
 
@@ -674,7 +656,7 @@ class SalarySlip(TransactionBase):
 
 			if cint(leave.is_ppl):
 				equivalent_lwp_count *= (
-					fraction_of_daily_salary_per_leave if fraction_of_daily_salary_per_leave else 1
+					(1 - fraction_of_daily_salary_per_leave) if fraction_of_daily_salary_per_leave else 1
 				)
 
 			lwp += equivalent_lwp_count
@@ -1142,6 +1124,7 @@ class SalarySlip(TransactionBase):
 
 		self.add_structure_components(component_type)
 		self.add_additional_salary_components(component_type)
+
 		if component_type == "earnings":
 			self.add_employee_benefits()
 		else:
@@ -1481,6 +1464,7 @@ class SalarySlip(TransactionBase):
 				"salary_component",
 				"abbr",
 				"do_not_include_in_total",
+				"do_not_include_in_accounts",
 				"is_tax_applicable",
 				"is_flexible_benefit",
 				"variable_based_on_taxable_salary",
@@ -1768,6 +1752,9 @@ class SalarySlip(TransactionBase):
 			to_date = getdate(self.payroll_period.end_date)
 
 		future_recurring_period = ((to_date.year - from_date.year) * 12) + (to_date.month - from_date.month)
+
+		if future_recurring_period > 0 and to_date.month == from_date.month:
+			future_recurring_period -= 1
 
 		return future_recurring_period
 
