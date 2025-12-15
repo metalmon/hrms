@@ -36,9 +36,7 @@ class TestGratuity(IntegrationTestCase):
 			relieving_date=self.relieving_date,
 		)
 
-		make_earning_salary_component(
-			setup=True, test_tax=True, company_list=["_Test Company"], include_flexi_benefits=True
-		)
+		make_earning_salary_component(setup=True, test_tax=True, company_list=["_Test Company"])
 		make_deduction_salary_component(setup=True, test_tax=True, company_list=["_Test Company"])
 		make_holiday_list()
 
@@ -230,7 +228,9 @@ class TestGratuity(IntegrationTestCase):
 		fnf.submit()
 
 		jv = fnf.create_journal_entry()
-		jv.accounts[1].account = frappe.get_cached_value("Company", "_Test Company", "default_bank_account")
+		jv.accounts[1].account = (
+			frappe.get_cached_value("Company", "_Test Company", "default_bank_account") or "_Test Bank - _TC"
+		)
 		jv.cheque_no = "123456"
 		jv.cheque_date = getdate()
 		jv.save()
@@ -242,6 +242,21 @@ class TestGratuity(IntegrationTestCase):
 		jv.cancel()
 		gratuity.reload()
 		self.assertEqual(gratuity.status, "Unpaid")
+
+	def test_status_on_discard(self):
+		create_salary_slip(self.employee)
+		setup_gratuity_rule("Rule Under Limited Contract (UAE)")
+		set_mode_of_payment_account()
+		# create gratuity
+		gratuity = create_gratuity(
+			do_not_submit=True,
+			expense_account="Payment Account - _TC",
+			mode_of_payment="Cash",
+			employee=self.employee,
+		)
+		gratuity.discard()
+		gratuity.reload()
+		self.assertEqual(gratuity.status, "Cancelled")
 
 
 def setup_gratuity_rule(name: str) -> dict:
@@ -258,7 +273,7 @@ def setup_gratuity_rule(name: str) -> dict:
 	return rule
 
 
-def create_gratuity(**args):
+def create_gratuity(do_not_submit=False, **args):
 	if args:
 		args = frappe._dict(args)
 	gratuity = frappe.new_doc("Gratuity")
@@ -276,6 +291,8 @@ def create_gratuity(**args):
 		gratuity.cost_center = args.cost_center or "Main - _TC"
 
 	gratuity.save()
+	if do_not_submit:
+		return gratuity
 	gratuity.submit()
 
 	return gratuity

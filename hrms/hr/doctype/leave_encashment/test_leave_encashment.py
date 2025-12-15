@@ -392,7 +392,9 @@ class TestLeaveEncashment(IntegrationTestCase):
 		)
 		fnf.submit()
 		jv = fnf.create_journal_entry()
-		jv.accounts[1].account = frappe.get_cached_value("Company", "_Test Company", "default_bank_account")
+		jv.accounts[1].account = (
+			frappe.get_cached_value("Company", "_Test Company", "default_bank_account") or "_Test Bank - _TC"
+		)
 		jv.cheque_no = "123456"
 		jv.cheque_date = getdate()
 		jv.save()
@@ -416,6 +418,13 @@ class TestLeaveEncashment(IntegrationTestCase):
 		}
 		args.update(kwargs)
 		return create_leave_encashment(**args)
+
+	def test_status_on_discard(self):
+		encashment = self.create_test_leave_encashment()
+		encashment.save()
+		encashment.discard()
+		encashment.reload()
+		self.assertEqual(encashment.status, "Cancelled")
 
 
 def create_leave_encashment(**args):

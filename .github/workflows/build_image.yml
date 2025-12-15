@@ -1,13 +1,6 @@
 name: Build Container Image
 on:
-  release:
-    types: [published]
   workflow_dispatch:
-  push:
-    branches:
-      - version-15
-    tags:
-      - "*"
 jobs:
   build:
     name: Build

@@ -29,6 +29,5 @@
  "type": "Bar",
  "use_report_chart": 0,
  "value_based_on": "",
- "y_axis": [],
- "python_module": "hrms.hr.dashboard_chart_source.employees_by_age.employees_by_age"
+ "y_axis": []
 }

@@ -238,8 +238,8 @@ def get_work_anniversary_reminder_text(anniversary_persons: list) -> str:
 	if len(anniversary_persons) == 1:
 		anniversary_person = anniversary_persons[0]["name"]
 		completed_years = getdate().year - anniversary_persons[0]["date_of_joining"].year
-		return _("Today {0} completed {1} year(s) at our Company! 🎉").format(
-			_(anniversary_person), completed_years
+		return _("Today {0} completed {1} {2} at our Company! 🎉").format(
+			_(anniversary_person), completed_years, get_year_label(completed_years)
 		)
 
 	names_grouped_by_years = {}
@@ -250,13 +250,27 @@ def get_work_anniversary_reminder_text(anniversary_persons: list) -> str:
 		names_grouped_by_years.setdefault(completed_years, []).append(person["name"])
 
 	person_names_with_years = [
-		_("{0} completed {1} year(s)").format(comma_sep(person_names, _("{0} & {1}"), False), years)
+		_("{0} completed {1} {2}").format(
+			comma_sep(person_names, _("{0} & {1}"), False), years, get_year_label(years)
+		)
 		for years, person_names in names_grouped_by_years.items()
 	]
 
 	# converts ["Jim", "Rim", "Dim"] to Jim, Rim & Dim
 	anniversary_person = comma_sep(person_names_with_years, _("{0} & {1}"), False)
 	return _("Today {0} at our Company! 🎉").format(_(anniversary_person))
+
+
+def get_year_label(years: int) -> str:
+	years_abs = abs(years)
+	last_digit = years_abs % 10
+	last_two_digits = years_abs % 100
+
+	if last_digit == 1 and last_two_digits != 11:
+		return _("years", context="one")
+	if last_digit in (2, 3, 4) and last_two_digits not in (12, 13, 14):
+		return _("years", context="few")
+	return _("years", context="many")
 
 
 def send_work_anniversary_reminder(

@@ -72,7 +72,7 @@ class LeaveEncashment(AccountsController):
 			self.create_gl_entries(cancel=True)
 
 		self.create_leave_ledger_entry(submit=False)
-		self.ignore_linked_doctypes = ["GL Entry", "Advance Payment Ledger Entry"]
+		self.ignore_linked_doctypes = ["GL Entry", "Payment Ledger Entry", "Advance Payment Ledger Entry"]
 		self.set_status(update=True)
 
 	@frappe.whitelist()
@@ -312,6 +312,9 @@ class LeaveEncashment(AccountsController):
 		)
 
 		return gl_entry
+
+	def on_discard(self):
+		self.db_set("status", "Cancelled")
 
 
 def create_leave_encashment(leave_allocation):

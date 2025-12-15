@@ -29,6 +29,5 @@
  "type": "Line",
  "use_report_chart": 0,
  "value_based_on": "",
- "y_axis": [],
- "python_module": "hrms.hr.dashboard_chart_source.hiring_vs_attrition_count.hiring_vs_attrition_count"
+ "y_axis": []
 }

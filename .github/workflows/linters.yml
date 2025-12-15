@@ -1,7 +1,7 @@
 name: Linters
 
 on:
-  pull_request: { }
+  workflow_dispatch:
 
 jobs:
   commit-lint:

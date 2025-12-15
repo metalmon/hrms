@@ -31,6 +31,7 @@ class AdditionalSalary(Document):
 		self.validate_employee_referral()
 		self.validate_duplicate_additional_salary()
 		self.validate_tax_component_overwrite()
+		self.validate_accrual_component()
 
 		if self.amount < 0:
 			frappe.throw(_("Amount should not be less than zero"))
@@ -38,7 +39,7 @@ class AdditionalSalary(Document):
 	def validate_salary_structure(self):
 		if not frappe.db.exists("Salary Structure Assignment", {"employee": self.employee}):
 			frappe.throw(
-				_("There is no Salary Structure assigned to {0}. First assign a Salary Stucture.").format(
+				_("There is no Salary Structure assigned to {0}. First assign a Salary Structure.").format(
 					self.employee
 				)
 			)
@@ -180,6 +181,16 @@ class AdditionalSalary(Document):
 			).format(frappe.bold(_("Overwrite Salary Structure Amount")))
 			frappe.throw(msg, title=_("Invalid Additional Salary"))
 
+	def validate_accrual_component(self):
+		if frappe.db.get_value("Salary Component", self.salary_component, "accrual_component"):
+			frappe.msgprint(
+				_(
+					"{0} is an Accrual Component and this will be recorded as a payout in Employee Benefits Ledger"
+				).format(frappe.bold(self.salary_component)),
+				title=_("Warning"),
+				indicator="orange",
+			)
+
 	def update_return_amount_in_employee_advance(self):
 		if self.ref_doctype == "Employee Advance" and self.ref_docname:
 			return_amount = frappe.db.get_value("Employee Advance", self.ref_docname, "return_amount")
@@ -210,7 +221,7 @@ class AdditionalSalary(Document):
 		no_of_days = date_diff(getdate(end_date), getdate(start_date)) + 1
 		return amount_per_day * no_of_days
 
-	def validate_update_after_submit(self):
+	def before_update_after_submit(self):
 		if not self.disabled:
 			self.validate_recurring_additional_salary_overlap()
 
@@ -234,6 +245,7 @@ def get_additional_salaries(employee, start_date, end_date, component_type):
 			additional_sal.is_recurring,
 			overwrite_field,
 			additional_sal.deduct_full_tax_on_selected_payroll_date,
+			additional_sal.ref_doctype,
 		)
 		.where(
 			(additional_sal.employee == employee)

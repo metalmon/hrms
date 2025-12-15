@@ -75,6 +75,9 @@ class TestInterview(IntegrationTestCase):
 
 		frappe.db.set_single_value("HR Settings", "send_interview_reminder", 1)
 		send_interview_reminder()
+		import time
+
+		time.sleep(1)
 		self.assertTrue(get_email_by_subject("Subject: Interview Reminder"))
 
 	def test_notification_for_feedback_submission(self):
@@ -192,6 +195,15 @@ class TestInterview(IntegrationTestCase):
 		job_applicant.reload()
 
 		self.assertEqual(job_applicant.status, "Accepted")
+
+	def test_status_on_discard(self):
+		job_applicant = create_job_applicant()
+		interview = create_interview_and_dependencies(job_applicant.name, status="Pending")
+
+		interview.discard()
+		interview.reload()
+
+		self.assertEqual(interview.status, "Cancelled")
 
 	def tearDown(self):
 		frappe.db.rollback()

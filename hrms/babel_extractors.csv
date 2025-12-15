@@ -1,0 +1,6 @@
+**/hooks.py,frappe.gettext.extractors.python.extract
+**/*_dashboard/*/*.json,frappe.gettext.extractors.dashboard.extract
+**/dashboard_chart/*/*.json,frappe.gettext.extractors.dashboard.extract
+**/number_card/*/*.json,frappe.gettext.extractors.dashboard.extract
+
+
